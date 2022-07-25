@@ -1,0 +1,77 @@
+ui_print " "
+
+# magisk
+if [ -d /sbin/.magisk ]; then
+  MAGISKTMP=/sbin/.magisk
+else
+  MAGISKTMP=`find /dev -mindepth 2 -maxdepth 2 -type d -name .magisk`
+fi
+
+# optionals
+OPTIONALS=/sdcard/optionals.prop
+
+# info
+MODVER=`grep_prop version $MODPATH/module.prop`
+MODVERCODE=`grep_prop versionCode $MODPATH/module.prop`
+ui_print " ID=$MODID"
+ui_print " Version=$MODVER"
+ui_print " VersionCode=$MODVERCODE"
+ui_print " MagiskVersion=$MAGISK_VER"
+ui_print " MagiskVersionCode=$MAGISK_VER_CODE"
+ui_print " "
+
+# sepolicy.rule
+if [ "$BOOTMODE" != true ]; then
+  mount -o rw -t auto /dev/block/bootdevice/by-name/persist /persist
+  mount -o rw -t auto /dev/block/bootdevice/by-name/metadata /metadata
+fi
+FILE=$MODPATH/sepolicy.sh
+DES=$MODPATH/sepolicy.rule
+if [ -f $FILE ] && [ "`grep_prop sepolicy.sh $OPTIONALS`" != 1 ]; then
+  mv -f $FILE $DES
+  sed -i 's/magiskpolicy --live "//g' $DES
+  sed -i 's/"//g' $DES
+fi
+
+# .aml.sh
+mv -f $MODPATH/aml.sh $MODPATH/.aml.sh
+
+# cleaning
+ui_print "- Cleaning..."
+rm -rf /metadata/magisk/$MODID
+rm -rf /mnt/vendor/persist/magisk/$MODID
+rm -rf /persist/magisk/$MODID
+rm -rf /data/unencrypted/magisk/$MODID
+rm -rf /cache/magisk/$MODID
+ui_print " "
+
+# volume
+FILE=$MODPATH/.aml.sh
+PROP=`grep_prop volume.boost $OPTIONALS`
+if [ "$PROP" ]; then
+  ui_print "- Boost phone volume to $PROP"
+  sed -i "s/NUM=100/NUM=$PROP/g" $FILE
+  ui_print " "
+else
+  ui_print "- Boost phone volume to 100"
+  ui_print " "
+fi
+
+# other
+FILE=$MODPATH/service.sh
+if [ "`grep_prop other.etc $OPTIONALS`" == 1 ]; then
+  ui_print "- Activating other etc files bind mount..."
+  sed -i 's/#p//g' $FILE
+  ui_print " "
+fi
+
+# permission
+ui_print "- Setting permission..."
+DIR=`find $MODPATH/system/vendor -type d`
+for DIRS in $DIR; do
+  chown 0.2000 $DIRS
+done
+ui_print " "
+
+
+
