@@ -20,9 +20,6 @@
 - https://t.me/androidryukimodsdiscussions/29836
 - https://t.me/androidryukimodsdiscussions/60861
 
-## Bug Report
-- No bug report
-
 ## Credits and Contributors
 - https://t.me/viperatmos
 - https://t.me/androidryukimodsdiscussions
