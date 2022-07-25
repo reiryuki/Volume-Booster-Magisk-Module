@@ -36,5 +36,3 @@
 -
 
 
-
-          - Let's play the music 🎶 -
