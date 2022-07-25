@@ -2,7 +2,7 @@
 
 ## Descriptions
 - Increases maximum phone volumes
-- Patching *mixer*paths*.xml files systemlessly
+- Patching \*mixer\*paths\*.xml files systemlessly
 
 ## Requirements
 - Magisk installed
