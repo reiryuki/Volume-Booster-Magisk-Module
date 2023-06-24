@@ -5,10 +5,10 @@
 - Patching \*mixer\*paths\*.xml files systemlessly
 
 ## Requirements
-- Magisk installed
+- Magisk or KernelSU installed
 
 ## Installation Guide & Download Link
-- Install this module https://www.pling.com/p/1865118/ via Magisk Manager or Recovery
+- Install this module https://www.pling.com/p/1865118/ via Magisk app or KernelSU app or Recovery if Magisk installed
 - This is also an audio mod so, you need to install AML Magisk Module https://t.me/androidryukimodsdiscussions/29836 if using any other audio mod module
 - Reboot
 
@@ -18,7 +18,7 @@
 - https://t.me/androidryukimodsdiscussions/60861
 
 ## Support & Bug Report
-- https://t.me/androidryukimodsdiscussions/2618 (Z folder is enough, no need logs)
+- https://t.me/androidryukimodsdiscussions/2618
 
 ## Tested on
 - Android 12.1 Nusantara ROM

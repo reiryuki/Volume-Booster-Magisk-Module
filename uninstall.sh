@@ -1,12 +1,20 @@
 mount -o rw,remount /data
-MODPATH=${0%/*}
-MODID=`echo "$MODPATH" | sed 's|/data/adb/modules/||'`
+[ -z $MODPATH ] && MODPATH=${0%/*}
+[ -z $MODID ] && MODID=`basename "$MODPATH"`
+
+# log
+exec 2>$MODPATH\_uninstall.log
+set -x
+
+# run
+. $MODPATH/function.sh
 
 # cleaning
-rm -rf /metadata/magisk/"$MODID"
-rm -rf /mnt/vendor/persist/magisk/"$MODID"
-rm -rf /persist/magisk/"$MODID"
-rm -rf /data/unencrypted/magisk/"$MODID"
-rm -rf /cache/magisk/"$MODID"
+remove_sepolicy_rule
+
+
+
+
+
 
 
