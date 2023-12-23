@@ -1,11 +1,27 @@
 # space
 ui_print " "
 
+# var
+UID=`id -u`
+
 # log
 if [ "$BOOTMODE" != true ]; then
-  FILE=/sdcard/$MODID\_recovery.log
+  FILE=/data/media/"$UID"/$MODID\_recovery.log
   ui_print "- Log will be saved at $FILE"
   exec 2>$FILE
+  ui_print " "
+fi
+
+# optionals
+OPTIONALS=/data/media/"$UID"/optionals.prop
+if [ ! -f $OPTIONALS ]; then
+  touch $OPTIONALS
+fi
+
+# debug
+if [ "`grep_prop debug.log $OPTIONALS`" == 1 ]; then
+  ui_print "- The install log will contain detailed information"
+  set -x
   ui_print " "
 fi
 
@@ -28,12 +44,6 @@ else
   ui_print " MagiskVersionCode=$MAGISK_VER_CODE"
 fi
 ui_print " "
-
-# optionals
-OPTIONALS=/sdcard/optionals.prop
-if [ ! -f $OPTIONALS ]; then
-  touch $OPTIONALS
-fi
 
 # sepolicy
 FILE=$MODPATH/sepolicy.rule

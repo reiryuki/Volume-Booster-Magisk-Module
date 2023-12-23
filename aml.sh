@@ -1,4 +1,4 @@
-[ -z $MODPATH ] && MODPATH=${0%/*}
+[ ! "$MODPATH" ] && MODPATH=${0%/*}
 
 # destination
 MODMPS=`find $MODPATH -type f -name *mixer*paths*.xml`

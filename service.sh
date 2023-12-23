@@ -15,7 +15,7 @@ else
 fi
 PID=`pidof $SERVER`
 if [ "$PID" ]; then
-  killall $SERVER
+  killall $SERVER android.hardware.audio@4.0-service-mediatek
 fi
 
 # wait
