@@ -72,11 +72,11 @@ ui_print " "
 FILE=$MODPATH/.aml.sh
 PROP=`grep_prop volume.boost $OPTIONALS`
 if [ "$PROP" ]; then
-  ui_print "- Boost phone volume to $PROP"
+  ui_print "- Boosts phone volumes to $PROP"
   sed -i "s|100|$PROP|g" $FILE
   ui_print " "
 else
-  ui_print "- Boost phone volume to 100"
+  ui_print "- Boosts phone volumes to 100"
   ui_print " "
 fi
 
