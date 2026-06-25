@@ -58,17 +58,18 @@ mv -f $MODPATH/aml.sh $MODPATH/.aml.sh
 # cleaning
 ui_print "- Cleaning..."
 remove_sepolicy_rule
+rm -rf $MODPATH/image
 ui_print " "
 
 # volume
 FILE=$MODPATH/.aml.sh
 PROP=`grep_prop volume.boost $OPTIONALS`
 if [ "$PROP" ]; then
-  ui_print "- Boosts phone volumes to $PROP"
+  ui_print "- Boosts audio volumes to $PROP"
   sed -i "s|100|$PROP|g" $FILE
   ui_print " "
 else
-  ui_print "- Boosts phone volumes to 100"
+  ui_print "- Boosts audio volumes to 100"
   ui_print " "
 fi
 
